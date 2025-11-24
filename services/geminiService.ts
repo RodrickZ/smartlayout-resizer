@@ -1,10 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
 import { AspectRatio, ImageSize } from "../types";
-const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY; 
 
-const ai = new GoogleGenAI({
-  apiKey: GEMINI_API_KEY, // <--- 必须是这个变量
-});
 // Helper to check API key status
 export const checkApiKey = async (): Promise<boolean> => {
   if (window.aistudio && window.aistudio.hasSelectedApiKey) {
@@ -21,6 +17,7 @@ export const promptApiKeySelection = async (): Promise<void> => {
     console.error("AI Studio API helper not available.");
   }
 };
+
 export const generateResizedLayout = async (
   base64Data: string,
   mimeType: string,

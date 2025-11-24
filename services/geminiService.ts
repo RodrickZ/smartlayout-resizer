@@ -2,22 +2,7 @@ import { GoogleGenAI } from "@google/genai";
 import { AspectRatio, ImageSize } from "../types";
 const API_KEY = process.env.API_KEY;
 const ai = new GoogleGenAI({ apiKey: API_KEY });
-// Helper to check API key status
-export const checkApiKey = async (): Promise<boolean> => {
-  if (window.aistudio && window.aistudio.hasSelectedApiKey) {
-    return await window.aistudio.hasSelectedApiKey();
-  }
-  return false;
-};
 
-// Helper to trigger API key selection
-export const promptApiKeySelection = async (): Promise<void> => {
-  if (window.aistudio && window.aistudio.openSelectKey) {
-    await window.aistudio.openSelectKey();
-  } else {
-    console.error("AI Studio API helper not available.");
-  }
-};
 
 export const generateResizedLayout = async (
   base64Data: string,
@@ -27,7 +12,7 @@ export const generateResizedLayout = async (
   promptText?: string
 ): Promise<string> => {
   // Always initialize a new client to pick up the latest selected API key
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  //const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
   const model = 'gemini-3-pro-image-preview';
   

@@ -15,7 +15,9 @@ export const generateResizedLayout = async (
   promptText?: string
 ): Promise<string> => {
   // Always initialize a new client to pick up the latest selected API key
-  const apiKey = process.env.GEMINI_API_KEY;
+  // Check for runtime env var first, then build-time env var (for local dev)
+  const apiKey = (window as any).ENV?.GEMINI_API_KEY || process.env.GEMINI_API_KEY;
+
   if (!apiKey) {
     throw new Error("GEMINI_API_KEY is not set in environment variables.");
   }

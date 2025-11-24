@@ -1,4 +1,10 @@
-export type AspectRatio = '1:1' | '3:4' | '4:3' | '9:16' | '16:9';
+export interface Window {
+  ENV: {
+    GEMINI_API_KEY: string;
+  };
+}
+
+export type AspectRatio = '1:1' | '16:9' | '9:16' | '4:3' | '3:4';
 export type ImageSize = '1K' | '2K' | '4K';
 
 export interface ImageState {

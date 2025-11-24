@@ -1,0 +1,4 @@
+{
+  "name": "SmartLayout Resizer",
+  "description": "An intelligent image composition and resizing tool using the Gemini 3 Pro Image model. Upload an image to intelligently reframe and recompose it into various aspect ratios."
+}

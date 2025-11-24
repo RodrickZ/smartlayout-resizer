@@ -1,22 +1,11 @@
 import { GoogleGenAI } from "@google/genai";
 import { AspectRatio, ImageSize } from "../types";
 
-// Helper to check API key status
-export const checkApiKey = async (): Promise<boolean> => {
-  if (window.aistudio && window.aistudio.hasSelectedApiKey) {
-    return await window.aistudio.hasSelectedApiKey();
-  }
-  return false;
-};
+// Helper to check API key status - DEPRECATED/REMOVED
+// export const checkApiKey = ...
 
-// Helper to trigger API key selection
-export const promptApiKeySelection = async (): Promise<void> => {
-  if (window.aistudio && window.aistudio.openSelectKey) {
-    await window.aistudio.openSelectKey();
-  } else {
-    console.error("AI Studio API helper not available.");
-  }
-};
+// Helper to trigger API key selection - DEPRECATED/REMOVED
+// export const promptApiKeySelection = ...
 
 export const generateResizedLayout = async (
   base64Data: string,
@@ -26,13 +15,17 @@ export const generateResizedLayout = async (
   promptText?: string
 ): Promise<string> => {
   // Always initialize a new client to pick up the latest selected API key
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    throw new Error("GEMINI_API_KEY is not set in environment variables.");
+  }
+  const ai = new GoogleGenAI({ apiKey });
 
   const model = 'gemini-3-pro-image-preview';
-  
+
   // Stronger prompt to ensure aspect ratio is respected during image-to-image generation
-  const finalPrompt = promptText 
-    ? `${promptText}. IMPORTANT: The output image MUST strictly adhere to a ${aspectRatio} aspect ratio. Crop or extend the image content to fill the ${aspectRatio} frame completely.` 
+  const finalPrompt = promptText
+    ? `${promptText}. IMPORTANT: The output image MUST strictly adhere to a ${aspectRatio} aspect ratio. Crop or extend the image content to fill the ${aspectRatio} frame completely.`
     : `Reframe and resize this image to strictly fit a ${aspectRatio} aspect ratio. Crop the sides or extend the background as necessary to fill the ${aspectRatio} frame. Maintain the main subject's integrity but adapt the composition to the new shape.`;
 
   try {

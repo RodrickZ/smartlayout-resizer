@@ -29,7 +29,7 @@ export const generateResizedLayout = async (
   promptText?: string
 ): Promise<string> => {
   // Always initialize a new client to pick up the latest selected API key
-  //const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
   const model = 'gemini-3-pro-image-preview';
   

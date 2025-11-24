@@ -1,6 +1,7 @@
 import { GoogleGenAI } from "@google/genai";
 import { AspectRatio, ImageSize } from "../types";
-
+const API_KEY = process.env.API_KEY;
+const ai = new GoogleGenAI({ apiKey: API_KEY });
 // Helper to check API key status
 export const checkApiKey = async (): Promise<boolean> => {
   if (window.aistudio && window.aistudio.hasSelectedApiKey) {

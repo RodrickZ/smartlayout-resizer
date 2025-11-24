@@ -1,8 +1,10 @@
 import { GoogleGenAI } from "@google/genai";
 import { AspectRatio, ImageSize } from "../types";
-const API_KEY = process.env.API_KEY;
-const ai = new GoogleGenAI({ apiKey: API_KEY });
+const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY; 
 
+const ai = new GoogleGenAI({
+  apiKey: GEMINI_API_KEY, // <--- 必须是这个变量
+});
 
 export const generateResizedLayout = async (
   base64Data: string,
